@@ -5,6 +5,11 @@ import java.util.PrimitiveIterator;
 import java.util.Scanner;
 
 public class ArrayLearn {
+    /**
+     * 排序
+     * @param arr
+     * @return
+     */
     public int[] MySort(int[] arr) {
         PrimitiveIterator.OfInt iterator = Arrays.stream(arr).sorted().iterator();
         int i = 0;
@@ -22,7 +27,8 @@ public class ArrayLearn {
         String str = String.valueOf(input);
         char[] cha = str.toCharArray();
         StringBuffer res = new StringBuffer();
-        res.reverse();
+        //StringBuffer可以直接翻转字符串
+//        res.reverse();
         for (int i = str.length() - 1; i >= 0; i--) {
             res.append(cha[i]);
         }
