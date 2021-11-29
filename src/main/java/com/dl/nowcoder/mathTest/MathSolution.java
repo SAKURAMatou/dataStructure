@@ -1,8 +1,6 @@
 package com.dl.nowcoder.mathTest;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MathSolution {
@@ -68,6 +66,61 @@ public class MathSolution {
         System.out.println(sum);
     }
 
+    /**
+     * HJ5将十六进制数值字符串转化为十进制
+     * 写出一个程序，接受一个十六进制的数，输出该数值的十进制表示
+     * 输入0xA，输出10
+     *
+     * @param in
+     */
+    public void jinzhizhuanhuan(String in) {
+        HashMap<String, Integer> relationMap = new HashMap<String, Integer>() {
+            {
+                put("A", 10);
+                put("B", 11);
+                put("C", 12);
+                put("D", 13);
+                put("E", 14);
+                put("F", 15);
+            }
+        };
+        char[] chars = in.substring(2).toCharArray();
+        int len = chars.length;
+        int sum = 0;
+        for (int i = 0; i < len; i++) {
+            //直接使用字符去获取对应的映射时，java操作字符时本质是操作字符对应的ASCII码；需要把字符转化为字符串
+            String s = String.valueOf(chars[i]);
+            if (relationMap.containsKey(s)) {
+                sum += Math.pow(16, len - 1 - i) * relationMap.get(s);
+            } else {
+                sum += Math.pow(16, len - 1 - i) * Integer.valueOf(s);
+            }
+        }
+        //字符串转整数需要使用Integer.valueOf；
+        // Integer.getInteger(String)是获取系统属性，入参为系统属性的名称，不存在入参的系统属性时空指针
+        System.out.println(sum);
+
+    }
+
+    /**
+     * 统计字符串中每个字符出现次数
+     *
+     * @param str
+     */
+    public void countChars(String str) {
+        char[] chars = str.toCharArray();
+        HashMap<String, Integer> storage = new HashMap<String, Integer>(str.length());
+        for (char c : chars) {
+            String s = Character.toString(c);
+            storage.put(s, storage.getOrDefault(s, 0) + 1);
+        }
+        Set<String> keySet = storage.keySet();
+        for (String key : keySet) {
+            System.out.println(key + ":" + storage.get(key));
+        }
+
+    }
+
     public static void main(String[] args) {
         MathSolution mathSolution = new MathSolution();
 //        mathSolution.qienisike(6);
@@ -75,7 +128,9 @@ public class MathSolution {
 //        Optional<String> max = Arrays.stream(str.split("0")).max(Comparator.comparing(String::length));
 //        System.out.println(max.get().length());
 //        mathSolution.dengcha(275);
-        String a="I am a student";
-        System.out.println(new StringBuffer(a).reverse());
+//        String a = "I am a student";
+//        System.out.println(new StringBuffer(a).reverse());
+//        mathSolution.jinzhizhuanhuan("0xC460");
+        mathSolution.countChars("asdaa");
     }
 }
