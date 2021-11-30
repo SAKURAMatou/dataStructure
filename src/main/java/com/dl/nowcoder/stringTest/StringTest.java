@@ -1,5 +1,9 @@
 package com.dl.nowcoder.stringTest;
 
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
 /**
  * @author DML
  * @descriptions
@@ -83,12 +87,49 @@ public class StringTest {
         return true;
     }
 
+    /**
+     * HJ13句子逆序
+     *
+     * @param str
+     */
+    public void resverStrByWord(String str) {
+        String[] splits = str.split(" ");
+        String[] temp = new String[splits.length];
+        for (int i = splits.length - 1; i >= 0; i--) {
+            int a = splits.length - 1 - i;
+            temp[a] = splits[i];
+        }
+        String res = Arrays.stream(temp).collect(Collectors.joining(" ")).toString();
+        System.out.println(res);
+
+    }
+
+    /**
+     * HJ14字符串比较
+     * java直接使用字符串比较的话记比较的是字符串的ASCII码
+     * 手动写比较器的话？
+     *
+     * @param strs
+     */
+    public void StrCompare(String[] strs) {
+        Arrays.stream(strs).sorted().forEach(System.out::println);
+    }
+
     public static void main(String[] args) {
         StringTest stringTest = new StringTest();
-        String str1 = "abcbaaa";
+        String str1 = "I am a boy";
         String str2 = "werasdfaswer";
 //        System.out.println(stringTest.getCommonStr(str1, str2));
-        stringTest.huiwenStrLen(str1);
+//        stringTest.huiwenStrLen(str1);
 //        System.out.println(stringTest.checkIsHuiwen(str1));
+//        stringTest.resverStrByWord(str1);
+        Scanner scanner = new Scanner(System.in);
+        int len = scanner.nextInt();
+        String[] strs = new String[len];
+        for (int i = 0; i < len; i++) {
+            strs[i] = scanner.next();
+        }
+
+
     }
 }
