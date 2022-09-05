@@ -9,9 +9,17 @@ public class ThreadDemo {
     }
 
     public static void main(String[] args) {
-        MyThread myThread = new MyThread();
-        myThread.start();
+//        MyThread myThread = new MyThread();
 //        myThread.start();
-        System.out.println("mian线程");
+////        myThread.start();
+//        System.out.println("mian线程");
+        /**
+         * 不指定线程组时，创建的新线程和main同一个组
+         */
+        new Thread(() -> {
+            System.out.println("*************");
+            System.out.println(Thread.currentThread().getName() + ";" + Thread.currentThread().getThreadGroup().getName());
+        }).start();
+        System.out.println(Thread.currentThread().getName() + ";" + Thread.currentThread().getThreadGroup().getName());
     }
 }
